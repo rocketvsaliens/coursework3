@@ -1,5 +1,4 @@
 import pytest
-from datetime import datetime
 
 from classes import operation
 
@@ -10,7 +9,7 @@ from classes import operation
     ("12345", "Некорректный номер счёта или карты")
 ])
 def test_mask_number(number, expected_result):
-    """Проверяем, что функция правильно маскирует номер из 16 цифр"""
+    """Проверяем, что функция правильно маскирует номер"""
     assert operation.Operation.mask_number(number) == expected_result
 
 
@@ -20,7 +19,7 @@ def test_mask_number(number, expected_result):
     (None, "Неизвестно")
 ])
 def test_get_account_info(account, expected_result):
-    """Проверяем, что функция правильно форматирует информацию о счете с указанным аккаунтом"""
+    """Проверяем, что функция правильно форматирует информацию о счете или карте"""
     assert operation.Operation.get_account_info(account) == expected_result
 
 
@@ -55,24 +54,27 @@ def test_get_date_invalid_format(instance):
 
 
 def test_get_description(instance):
+    """Проверяем корректное описание"""
     assert instance.get_description() == instance._Operation__description
 
 
 def test_get_from(instance):
+    """Проверяем правильное получение отправителя"""
     assert instance.get_from() == instance._Operation__from
 
 
 def test_get_to(instance):
+    """Проверяем правильное получение получателя"""
     assert instance.get_to() == instance._Operation__to
 
 
 def test_create_amount_valid(instance):
-    # Проверяем, что функция правильно форматирует сумму и валюту для корректного словаря
+    """Проверяем, что функция правильно форматирует сумму и валюту для корректного словаря"""
     instance._Operation__amount = {'amount': 100.0, 'currency': {'name': 'USD'}}
     assert instance.create_amount() == '100.0 USD'
 
 
 def test_create_amount_invalid(instance):
-    # Проверяем, что функция возвращает 'Неизвестная сумма' для некорректного словаря
+    """Проверяем, что функция возвращает 'Неизвестная сумма' для некорректного словаря"""
     instance._Operation__amount = {'invalid_key': 100.0}
-    assert instance.create_amount() == 'Неизвестная сумма'
+    assert instance.create_amount() == 'Неизвестная сумма или валюта платежа'

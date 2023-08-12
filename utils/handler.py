@@ -1,6 +1,6 @@
 def get_executed(operations: list) -> list:
     """
-    Returns only EXECUTED transactions
+    Возвращает только ВЫПОЛНЕННЫЕ транзакции
     """
     return [operation for operation in operations
             if operation.get('state') == 'EXECUTED']
@@ -8,7 +8,7 @@ def get_executed(operations: list) -> list:
 
 def sort_operations(operations: list) -> list:
     """
-    Returns transactions sorted by date
+    Сортирует выполненные транзакции по дате
     """
     return sorted(get_executed(operations),
                   key=lambda x: x['date'], reverse=True)

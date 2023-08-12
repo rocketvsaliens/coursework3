@@ -21,14 +21,17 @@ def executed():
 
 
 def test_sort_operations_empty_list():
+    """Тестируем пустой список"""
     assert handler.sort_operations([]) == []
 
 
 def test_get_executed(not_executed):
+    """Тестируем список без выполненных операций"""
     assert handler.get_executed(not_executed) == []
 
 
 def test_sort_operations_executed(executed):
+    """Тестируем список с выполненными операциями"""
     expected_result = [
         {'date': '2022-01-02', 'state': 'EXECUTED'},
         {'date': '2022-01-01', 'state': 'EXECUTED'}

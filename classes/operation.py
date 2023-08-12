@@ -24,6 +24,7 @@ class Operation:
 
     @staticmethod
     def mask_number(number: str) -> str:
+        """ Функция маскировки номера карты или счёта"""
         if len(number) == 16:
             number_hide = number[:6] + "*" * 6 + number[12:]
             return " ".join([number_hide[i:i + 4] for i in range(0, len(number_hide), 4)])
@@ -33,6 +34,11 @@ class Operation:
 
     @staticmethod
     def get_account_info(account: str) -> str:
+        """
+        Функция разбивки строки для корректной маскировки номера карты или счёта.
+        Возвращает строку вида <название карты><замаскированный номер> или <счёт><замаскированный номер>.
+        В случае отсутствия информации возвращает 'Неизвестно'
+        """
         if account is not None:
             data_split = account.split()
             card_name = data_split[:-1]
@@ -42,6 +48,7 @@ class Operation:
             return 'Неизвестно'
 
     def get_date(self) -> str:
+        """Представление даты в понятном человекам формате"""
         try:
             date = datetime.strptime(self.__date, '%Y-%m-%dT%H:%M:%S.%f')
             return date.strftime('%d.%m.%Y')
@@ -49,17 +56,21 @@ class Operation:
             return "Некорректная дата"
 
     def get_description(self) -> str:
+        """Получаем описание платежа"""
         return self.__description
 
     def get_from(self) -> str:
+        """Получаем номер карты или счёт отправителя"""
         return self.__from
 
     def get_to(self) -> str:
+        """Получаем номер карты или счёт получателя"""
         return self.__to
 
     def create_amount(self) -> str:
+        """Получаем сумму платежа в формате <сумма платежа><валюта платежа>"""
         match self.__amount:
             case {'amount': amount, 'currency': {'name': name}}:
                 return f"{amount} {name}"
             case _:
-                return 'Неизвестная сумма'
+                return 'Неизвестная сумма или валюта платежа'

@@ -15,6 +15,7 @@ def sample_data():
 
 
 def test_load_data_from_file(sample_data):
+    """Тестируем загрузку файла и ошибку загрузки - 'Файл не найден'"""
     data = loader.load_data_from_file('tests/test_data.json')
     non_existing_file = loader.load_data_from_file("non_existing.json")
     assert data == sample_data
