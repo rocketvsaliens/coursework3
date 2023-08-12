@@ -55,14 +55,17 @@ class Operation:
         except ValueError:
             return "Некорректная дата"
 
+    @property
     def get_description(self) -> str:
         """Получаем описание платежа"""
         return self.__description
 
+    @property
     def get_from(self) -> str:
         """Получаем номер карты или счёт отправителя"""
         return self.__from
 
+    @property
     def get_to(self) -> str:
         """Получаем номер карты или счёт получателя"""
         return self.__to

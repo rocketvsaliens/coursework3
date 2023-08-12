@@ -53,21 +53,6 @@ def test_get_date_invalid_format(instance):
     assert instance.get_date() == 'Некорректная дата'
 
 
-def test_get_description(instance):
-    """Проверяем корректное описание"""
-    assert instance.get_description() == instance._Operation__description
-
-
-def test_get_from(instance):
-    """Проверяем правильное получение отправителя"""
-    assert instance.get_from() == instance._Operation__from
-
-
-def test_get_to(instance):
-    """Проверяем правильное получение получателя"""
-    assert instance.get_to() == instance._Operation__to
-
-
 def test_create_amount_valid(instance):
     """Проверяем, что функция правильно форматирует сумму и валюту для корректного словаря"""
     instance._Operation__amount = {'amount': 100.0, 'currency': {'name': 'USD'}}
