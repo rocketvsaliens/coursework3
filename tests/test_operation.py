@@ -63,3 +63,11 @@ def test_create_amount_invalid(instance):
     """Проверяем, что функция возвращает 'Неизвестная сумма' для некорректного словаря"""
     instance._Operation__amount = {'invalid_key': 100.0}
     assert instance.create_amount() == 'Неизвестная сумма или валюта платежа'
+
+
+def test_create_payment(instance):
+    """Проверяем, что экземпляр класса выводит операцию правильно"""
+    payment = "26.08.2019 Перевод организации\n" \
+                      "Maestro 1596 83** **** 5199 -> Счет **9589\n" \
+                      "31957.58 руб.\n"
+    assert operation.Operation.create_payment(instance) == payment
