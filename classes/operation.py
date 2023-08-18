@@ -77,3 +77,15 @@ class Operation:
                 return f"{amount} {name}"
             case _:
                 return 'Неизвестная сумма или валюта платежа'
+
+    def create_payment(self) -> str:
+        """
+        Выводим операцию на экран в формате:
+        <дата перевода> <описание перевода>
+        <откуда> -> <куда>
+        <сумма перевода> <валюта>
+        """
+        return f'{self.get_date()} {self.get_description}\n' \
+               f'{self.get_account_info(self.get_from)} -> ' \
+               f'{self.get_account_info(self.get_to)}\n' \
+               f'{self.create_amount()}\n'
