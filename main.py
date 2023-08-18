@@ -1,3 +1,4 @@
+import utils.handler
 from utils import loader, handler
 from classes import operation
 from config import JSON_DATA_PATH, NUMBER_OF_TRANSACTIONS_TO_SHOW
@@ -13,7 +14,7 @@ def main():
     # собираем все операции
     operations = loader.load_data_from_file(JSON_DATA_PATH)
     # выбираем и сортируем по дате N последних выполненных транзакций
-    last_operations = handler.sort_operations(operations)[:NUMBER_OF_TRANSACTIONS_TO_SHOW]
+    last_operations = handler.get_executed(operations)[:NUMBER_OF_TRANSACTIONS_TO_SHOW]
 
     # создаём экземпляры класса из последних выполненных операций
     transactions = [operation.Operation(i) for i in last_operations]

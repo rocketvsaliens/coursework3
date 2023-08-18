@@ -22,7 +22,7 @@ def executed():
 
 def test_sort_operations_empty_list():
     """Тестируем пустой список"""
-    assert handler.sort_operations([]) == []
+    assert handler.get_executed([]) == []
 
 
 def test_get_executed(not_executed):
@@ -36,4 +36,4 @@ def test_sort_operations_executed(executed):
         {'date': '2022-01-02', 'state': 'EXECUTED'},
         {'date': '2022-01-01', 'state': 'EXECUTED'}
     ]
-    assert handler.sort_operations(executed) == expected_result
+    assert handler.get_executed(executed) == expected_result
